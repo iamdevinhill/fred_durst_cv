@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fred Durst Facial Recognition</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1></h1>
+        <br>
+        <h1>Ever wonder if you were Fred Durst?<br>Now you can know with<br>Fred Durst Facial Recognition!</h1>
+        <div class="video-container">
+            <img id="video-feed" src="http://localhost:8000/video_feed" alt="Video Feed">
+        </div>
+        <div class="status-container">
+        </div>
+    </div>
+
+    <script>
+        function updateStatus() {
+            fetch('/status')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("status-text").textContent = data.status;
+                    document.getElementById("confidence-text").textContent = `Confidence: ${data.confidence}`;
+                });
+        }
+
+        setInterval(updateStatus, 1000); // Update status every second
+    </script>
+</body>
+</html>
